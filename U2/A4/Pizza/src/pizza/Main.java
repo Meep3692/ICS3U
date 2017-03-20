@@ -1,6 +1,7 @@
 /*
 Author: Darian
 Date Modified: March 9, 2017
+IDE: Netbeans 8.2
 Program: Calculates pizza price based on size
 File: GUI and logic
  */
