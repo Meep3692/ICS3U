@@ -7,8 +7,8 @@ File: Wave file utilities, including finding the amplitude at certain frames
  */
 package randomnumber;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import javax.sound.sampled.AudioFormat;
@@ -40,7 +40,7 @@ public class WaveFile {
 
     public WaveFile(String location) throws UnsupportedAudioFileException, IOException {
 
-        ais = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(location));
+        ais = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream(location)));
 
         af = ais.getFormat();
 
@@ -57,7 +57,7 @@ public class WaveFile {
         data = new byte[(int) dataLength];
         ais.read(data);
         
-        AudioInputStream aisForPlay = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(location));
+        AudioInputStream aisForPlay = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream(location)));
         try {
             clip = AudioSystem.getClip();
             clip.open(aisForPlay);
