@@ -108,11 +108,11 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void enterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterButtonActionPerformed
-        int catagory;
-        String speeds;
-        catagory = Integer.parseInt(catagoryField.getText());
-        outputLabel1.setText("A hurricane of catagory " + Integer.toString(catagory) + " has windspeeds of:");
-        switch(catagory){
+        int catagory;//Catagory of hurricane
+        String speeds;//Speeds description to put in second line
+        catagory = Integer.parseInt(catagoryField.getText());//Parse catagory
+        outputLabel1.setText("A hurricane of catagory " + Integer.toString(catagory) + " has windspeeds of:");//Set first line
+        switch(catagory){//Find string to set second line to based on catagory entered
             case 1:
                 speeds = "74-95 mph or 64-82 kt or 119-153 km/hr";
                 break;
@@ -128,11 +128,11 @@ public class Main extends javax.swing.JFrame {
             case 5:
                 speeds = "greater than 155 mph or 135 kt or 249 km/hr";
                 break;
-            default:
+            default://User has entered a number out of range
                 speeds = "entering a number between 1 and 5, like you should do";
                 break;
         }
-        outputLabel2.setText(speeds);
+        outputLabel2.setText(speeds);//Set second line
     }//GEN-LAST:event_enterButtonActionPerformed
 
     /**
