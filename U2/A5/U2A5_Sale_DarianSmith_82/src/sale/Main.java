@@ -1,7 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Author: Darian
+Date Modified: March 23, 2017
+IDE: Netbeans 8.2
+Program: Calculate the discount on a purchase where a 10% discount is given to purchases over $10
+File: GUI and logic
  */
 package sale;
 
