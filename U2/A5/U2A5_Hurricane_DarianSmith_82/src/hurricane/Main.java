@@ -28,22 +28,112 @@ public class Main extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        titleLabel = new javax.swing.JLabel();
+        contentPanel = new javax.swing.JPanel();
+        catagoryLabel = new javax.swing.JLabel();
+        catagoryField = new javax.swing.JTextField();
+        enterButton = new javax.swing.JButton();
+        outputLabel1 = new javax.swing.JLabel();
+        outputLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        titleLabel.setFont(new java.awt.Font("Edwardian Script ITC", 0, 36)); // NOI18N
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("Hurricane Scale");
+
+        contentPanel.setLayout(new java.awt.GridBagLayout());
+
+        catagoryLabel.setText("Enter Hurricane Catagory:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        contentPanel.add(catagoryLabel, gridBagConstraints);
+
+        catagoryField.setText("1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        contentPanel.add(catagoryField, gridBagConstraints);
+
+        enterButton.setText("Enter");
+        enterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        contentPanel.add(enterButton, gridBagConstraints);
+
+        outputLabel1.setText("A hurricane of catagory 1 has windspeeds of:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        contentPanel.add(outputLabel1, gridBagConstraints);
+
+        outputLabel2.setText("74-95 mph or 64-82 kt or 119-153 km/hr");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        contentPanel.add(outputLabel2, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(contentPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void enterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterButtonActionPerformed
+        int catagory;
+        String speeds;
+        catagory = Integer.parseInt(catagoryField.getText());
+        outputLabel1.setText("A hurricane of catagory " + Integer.toString(catagory) + " has windspeeds of:");
+        switch(catagory){
+            case 1:
+                speeds = "74-95 mph or 64-82 kt or 119-153 km/hr";
+                break;
+            case 2:
+                speeds = "96-110 mph or 83-95 kt or 154-177 km/hr";
+                break;
+            case 3:
+                speeds = "111-130 mph or 96-113 kt or 178-209 km/hr";
+                break;
+            case 4:
+                speeds = "131-155 mph or 114-135 kt or 210-249 km/hr";
+                break;
+            case 5:
+                speeds = "greater than 155 mph or 135 kt or 249 km/hr";
+                break;
+            default:
+                speeds = "entering a number between 1 and 5, like you should do";
+                break;
+        }
+        outputLabel2.setText(speeds);
+    }//GEN-LAST:event_enterButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -81,5 +171,12 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField catagoryField;
+    private javax.swing.JLabel catagoryLabel;
+    private javax.swing.JPanel contentPanel;
+    private javax.swing.JButton enterButton;
+    private javax.swing.JLabel outputLabel1;
+    private javax.swing.JLabel outputLabel2;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }
