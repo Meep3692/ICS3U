@@ -41,6 +41,7 @@ public class Main extends javax.swing.JFrame {
         };
         historyTable.setModel(historyModel);//Set the table to use our new table model
         newGame();//Start a new game
+        setHelpTopic("General");
     }
     
     private void newGame(){
@@ -208,7 +209,6 @@ public class Main extends javax.swing.JFrame {
         });
         topicsScrollPane.setViewportView(topicsTree);
 
-        helpContentLabel.setText("<html><head>\n\t\t<style>\n\t\t\tpre code {\n\t\t\t\tbackground-color: #eee;\n\t\t\t\tborder: 1px solid #999;\n\t\t\t\tdisplay: block;\n\t\t\t\tpadding: 20px;\n\t\t\t}\n\t\t</style>\n\t</head>\n\t<body>\n\t\t<h1>FTB Install:</h1>\n\t\t<p>If you are using the curse launcher, it will be slightly different. To download the old launcher, go to the FTB download page and click Legacy(Windows) under the download button.</p>\n\t\t<p>The server is running FTB Inventions with some modifications. Install and run FTB Inventions once to get the necessary files.</p>\n\t\t<p>The first major modification is to the configs to allow for normal IC2 crafting. For this go into your FTB Inventions install folder and locate the configs for Advanced Solar Panels and TechReborn (config\\AdvancedSolarPanel.cfg and config\\TechReborn.cfg respectivly). Open these with your favorite plain-text editor (notepad, notepad++, EDIT.CMD) and modify the following lines:</p>\n\t\t<h3>AdvancedSolarPanel.cfg</h3>\n\t\t<pre><code>B:\"Enable hard recipes\"=false</code></pre>\n\t\t<h3>TechReborn.cfg</h3>\n\t\t<pre><code>crafting {\n\tB:\"Allow Expensive Diamond Drill\"=false\n\tB:\"Allow Expensive Drill\"=false\n\tB:\"Allow Expensive Macerator\"=false\n\tB:\"Allow Expensive Solar Panels\"=false\n\t\t\t\n\t#  Allow Expensive Watermill\n\tB:\"Allow Expensive Watermill\"=false\n\n\t#  Allow Expensive Watermill\n\tB:\"Allow Expensive Windmill\"=false\n}</code></pre>\n\t\t<p>Next, ComputerCraft has been removed in favour of OpenComputers and Computronics. You need to download them from the following locations and remember to get the latest 1.7.10 version.</p>\n\t\t<a href=\"https://mods.curse.com/mc-mods/minecraft/223008-opencomputers#t1:other-downloads\">OpenComputers</a><br>\n\t\t<a href=\"http://wiki.vex.tty.sh/wiki:computronics\">Computronics</a><br>\n\t\t<a href=\"http://wiki.vex.tty.sh/wiki:asielib\">AsieLib(needed for computronics)</a><br>\n\t\t<p>Now in the FTB Launcher, select FTB Inventions and click \"Edit Mod Pack\". A window will open with a list of mods in it. Find \"ComuterCraft1.75\" in \"Enabled Mods\" and click Disable&gt;&gt;. Now click \"Add Mod\" and find and select one of the mods you just downloaded. Click \"Open\" and repeat for the other 2 mods.</p>\n\t\t<p>You should now be able to connect to the server at awoo.dlinkddns.com</p>\n\t\n</body></html>");
         helpContentLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         helpContentLabel.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         helpTopicScrollPane.setViewportView(helpContentLabel);
