@@ -532,6 +532,9 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JFrame" name="helpFrame">
+      <Properties>
+        <Property name="title" type="java.lang.String" value="Help"/>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
