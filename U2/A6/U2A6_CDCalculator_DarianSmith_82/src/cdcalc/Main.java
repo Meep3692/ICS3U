@@ -1,9 +1,9 @@
 /*
-Author: 
-Date Modified: 
+Author: Darian
+Date Modified: March 30, 2017
 IDE: Netbeans 8.2
-Program: 
-File: 
+Program: Calculate CD period given starting value, intrest rate, and ending value
+File: GUI and Logic
  */
 package cdcalc;
 
@@ -28,18 +28,90 @@ public class Main extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        titleLabel = new javax.swing.JLabel();
+        contentPanel = new javax.swing.JPanel();
+        initLabel = new javax.swing.JLabel();
+        rateLabel = new javax.swing.JLabel();
+        endLabel = new javax.swing.JLabel();
+        initField = new javax.swing.JTextField();
+        rateField = new javax.swing.JTextField();
+        endField = new javax.swing.JTextField();
+        confirmButton = new javax.swing.JButton();
+        outputLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        titleLabel.setFont(new java.awt.Font("Edwardian Script ITC", 0, 48)); // NOI18N
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("CD Calculator");
+
+        contentPanel.setLayout(new java.awt.GridBagLayout());
+
+        initLabel.setText("Initial Investment ($)");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        contentPanel.add(initLabel, gridBagConstraints);
+
+        rateLabel.setText("Annual Intrest Rate (%)");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        contentPanel.add(rateLabel, gridBagConstraints);
+
+        endLabel.setText("Ending value ($)");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        contentPanel.add(endLabel, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        contentPanel.add(initField, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        contentPanel.add(rateField, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        contentPanel.add(endField, gridBagConstraints);
+
+        confirmButton.setText("Calculate");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        contentPanel.add(confirmButton, gridBagConstraints);
+
+        outputLabel.setText("Number of years required: ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        contentPanel.add(outputLabel, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -81,5 +153,15 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton confirmButton;
+    private javax.swing.JPanel contentPanel;
+    private javax.swing.JTextField endField;
+    private javax.swing.JLabel endLabel;
+    private javax.swing.JTextField initField;
+    private javax.swing.JLabel initLabel;
+    private javax.swing.JLabel outputLabel;
+    private javax.swing.JTextField rateField;
+    private javax.swing.JLabel rateLabel;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }
