@@ -83,6 +83,11 @@ public class Main extends javax.swing.JFrame {
         contentPanel.add(endField, gridBagConstraints);
 
         confirmButton.setText("Calculate");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -116,6 +121,23 @@ public class Main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        float initValue, intrestRate, endValue;//Vars for later
+        initValue = Float.parseFloat(initField.getText());//Parse values
+        intrestRate = Float.parseFloat(rateField.getText()) / 100;
+        endValue = Float.parseFloat(endField.getText());
+        if(initValue <= 0){//Avoid infinite loop
+            return;
+        }
+        int years = 0;//Initialize counter
+        float current = initValue;//Initialize current investment tracker
+        while(current < endValue){//Until we reach the goal
+            current += current * intrestRate;//Add intrest for next year
+            years++;//Increment counter
+        }
+        outputLabel.setText("Number of years required: " + years);//Set output
+    }//GEN-LAST:event_confirmButtonActionPerformed
 
     /**
      * @param args the command line arguments
