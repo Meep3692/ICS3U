@@ -157,7 +157,7 @@ public class Main extends javax.swing.JFrame {
                 break;
             case 1://imperial
                 weight = height * height * 25 / 703;
-                outputLabel.setText(name + "'s ideal weight is " + format.format(weight) + " pounds");
+                outputLabel.setText(name + "'s ideal weight is " + format.format(weight) + " lbs");
                 break;
         }
     }//GEN-LAST:event_confirmButtonActionPerformed
