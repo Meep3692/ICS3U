@@ -7,16 +7,21 @@ File: GUI and logic
  */
 package idealweight;
 
+import java.text.DecimalFormat;
+
 /**
  *
  * @author Meep3_000
  */
 public class Main extends javax.swing.JFrame {
-
+    
+    private DecimalFormat format;
+    
     /**
      * Creates new form Main
      */
     public Main() {
+        format = new DecimalFormat("#.##");
         initComponents();
     }
 
@@ -42,6 +47,7 @@ public class Main extends javax.swing.JFrame {
         outputLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Ideal Weight");
 
         titleLabel.setFont(new java.awt.Font("Edwardian Script ITC", 0, 48)); // NOI18N
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -98,11 +104,17 @@ public class Main extends javax.swing.JFrame {
         contentPanel.add(systemComboBox, gridBagConstraints);
 
         confirmButton.setText("Calculate");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         contentPanel.add(confirmButton, gridBagConstraints);
 
+        outputLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         outputLabel.setText("Awoo!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -130,6 +142,25 @@ public class Main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        float height, weight;
+        String name;
+        int system;
+        height = Float.parseFloat(heightField.getText());//parse height and name
+        name = nameField.getText();
+        system = systemComboBox.getSelectedIndex();//0 = metric, 1 = imperial
+        switch(system){
+            case 0://metric
+                weight = height * height * 0.0025f;//Adapted the formula for cm
+                outputLabel.setText(name + "'s ideal weight is " + format.format(weight) + " kg");//Doing this here because of different units
+                break;
+            case 1://imperial
+                weight = height * height * 25 / 703;
+                outputLabel.setText(name + "'s ideal weight is " + format.format(weight) + " pounds");
+                break;
+        }
+    }//GEN-LAST:event_confirmButtonActionPerformed
 
     /**
      * @param args the command line arguments
