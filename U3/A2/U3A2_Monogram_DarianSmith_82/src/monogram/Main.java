@@ -42,6 +42,7 @@ public class Main extends javax.swing.JFrame {
         outputLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Monogram Generator");
 
         titleLabel.setFont(new java.awt.Font("Edwardian Script ITC", 0, 48)); // NOI18N
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
