@@ -35,7 +35,7 @@ public class Main extends javax.swing.JFrame {
         userLabel = new javax.swing.JLabel();
         userField = new javax.swing.JTextField();
         passLabel = new javax.swing.JLabel();
-        passField = new javax.swing.JTextField();
+        passField = new javax.swing.JPasswordField();
         confirmButton = new javax.swing.JButton();
         outputLabel = new javax.swing.JLabel();
 
@@ -47,7 +47,7 @@ public class Main extends javax.swing.JFrame {
         titleLabel.setText("Passwordator");
 
         java.awt.GridBagLayout contentPanelLayout = new java.awt.GridBagLayout();
-        contentPanelLayout.columnWidths = new int[] {59, 59};
+        contentPanelLayout.columnWidths = new int[] {70, 70};
         contentPanel.setLayout(contentPanelLayout);
 
         userLabel.setText("Username: ");
@@ -77,6 +77,11 @@ public class Main extends javax.swing.JFrame {
         contentPanel.add(passField, gridBagConstraints);
 
         confirmButton.setText("Enter");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -111,6 +116,20 @@ public class Main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        String user, pass;//Declare vars
+        user = userField.getText();//Get values from ui
+        pass = passField.getText();//I know it's depricated, but we don't really care about security here
+        if (pass.length() < 8){//Password too short
+            outputLabel.setText("Password must be at least 8 characters long");
+            return;
+        }
+        user = user.toLowerCase();//Convert to lower case
+        pass = pass.toLowerCase();
+        pass += (int)Math.ceil(Math.random() * 100);//Ciel instead of floor because random gives [0, 1) and we want [1, 100]
+        outputLabel.setText("Username: " + user + ", Password: " + pass);//Set output
+    }//GEN-LAST:event_confirmButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,7 +170,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton confirmButton;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JLabel outputLabel;
-    private javax.swing.JTextField passField;
+    private javax.swing.JPasswordField passField;
     private javax.swing.JLabel passLabel;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JTextField userField;
