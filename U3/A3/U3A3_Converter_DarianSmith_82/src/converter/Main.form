@@ -23,8 +23,8 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="titleLabel" alignment="0" max="32767" attributes="0"/>
-          <Component id="contentPanel" alignment="0" pref="400" max="32767" attributes="0"/>
+          <Component id="titleLabel" alignment="0" pref="400" max="32767" attributes="0"/>
+          <Component id="contentPanel" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -81,16 +81,8 @@
         </Component>
         <Component class="javax.swing.JComboBox" name="fromUnitComboBox">
           <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="7">
-                <StringItem index="0" value="Centimetres"/>
-                <StringItem index="1" value="Metres"/>
-                <StringItem index="2" value="Kilometres"/>
-                <StringItem index="3" value="Inches"/>
-                <StringItem index="4" value="Feet"/>
-                <StringItem index="5" value="Yards"/>
-                <StringItem index="6" value="Miles"/>
-              </StringArray>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new DefaultComboBoxModel(Units.values())" type="code"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -104,16 +96,8 @@
         </Component>
         <Component class="javax.swing.JComboBox" name="toUnitComboBox">
           <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="7">
-                <StringItem index="0" value="Centimetres"/>
-                <StringItem index="1" value="Metres"/>
-                <StringItem index="2" value="Kilometres"/>
-                <StringItem index="3" value="Inches"/>
-                <StringItem index="4" value="Feet"/>
-                <StringItem index="5" value="Yards"/>
-                <StringItem index="6" value="Miles"/>
-              </StringArray>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new DefaultComboBoxModel(Units.values())" type="code"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -129,13 +113,16 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Convert"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="confirmButtonActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
               <GridBagConstraints gridX="1" gridY="1" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="5" insetsBottom="5" insetsRight="5" anchor="10" weightX="0.0" weightY="0.0"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="outputLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="0 cm is 0 cm"/>
           </Properties>
@@ -688,11 +675,11 @@
             <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component, java.lang.Object"/>
           </StatementProvider>
           <Parameters>
-            <CodeExpression id="39_jLabel1">
-              <CodeVariable name="jLabel1" type="8194" declaredType="javax.swing.JLabel"/>
+            <CodeExpression id="39_outputLabel">
+              <CodeVariable name="outputLabel" type="8194" declaredType="javax.swing.JLabel"/>
               <ExpressionOrigin>
                 <ExpressionProvider type="ComponentRef">
-                  <ComponentRef name="jLabel1"/>
+                  <ComponentRef name="outputLabel"/>
                 </ExpressionProvider>
               </ExpressionOrigin>
             </CodeExpression>

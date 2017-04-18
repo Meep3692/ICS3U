@@ -7,12 +7,40 @@ File: GUI and logic
  */
 package converter;
 
+import java.text.DecimalFormat;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author Meep3_000
  */
 public class Main extends javax.swing.JFrame {
-
+    /**
+     * Get the proper abbreviation of a unit
+     * @param unit Unit to get abbreviation of
+     * @return Abbreviation of given unit
+     */
+    private String getUnitPrettyShort(Units unit){
+        switch(unit){
+            case CENTIMETRES:
+                return "cm";
+            case METRES:
+                return "m";
+            case KILOMETRES:
+                return "km";
+            case INCHES:
+                return "\"";
+            case FEET:
+                return "'";
+            case YARDS:
+                return "yd";
+            case MILES:
+                return "mi";
+            default:
+                return "";
+        }
+    }
+    
     /**
      * Creates new form Main
      */
@@ -38,7 +66,7 @@ public class Main extends javax.swing.JFrame {
         fromUnitComboBox = new javax.swing.JComboBox<>();
         toUnitComboBox = new javax.swing.JComboBox<>();
         confirmButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        outputLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,14 +100,14 @@ public class Main extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         contentPanel.add(inputField, gridBagConstraints);
 
-        fromUnitComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Centimetres", "Metres", "Kilometres", "Inches", "Feet", "Yards", "Miles" }));
+        fromUnitComboBox.setModel(new DefaultComboBoxModel(Units.values()));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         contentPanel.add(fromUnitComboBox, gridBagConstraints);
 
-        toUnitComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Centimetres", "Metres", "Kilometres", "Inches", "Feet", "Yards", "Miles" }));
+        toUnitComboBox.setModel(new DefaultComboBoxModel(Units.values()));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
@@ -87,25 +115,30 @@ public class Main extends javax.swing.JFrame {
         contentPanel.add(toUnitComboBox, gridBagConstraints);
 
         confirmButton.setText("Convert");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         contentPanel.add(confirmButton, gridBagConstraints);
 
-        jLabel1.setText("0 cm is 0 cm");
+        outputLabel.setText("0 cm is 0 cm");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 3;
-        contentPanel.add(jLabel1, gridBagConstraints);
+        contentPanel.add(outputLabel, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,6 +150,23 @@ public class Main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        Units from, to;//Declare vars
+        double inValue, outValue;
+        Converter converter;
+        DecimalFormat formater;
+        
+        from = (Units)fromUnitComboBox.getSelectedItem();//Get selection from clever enum modeled combo boxes
+        to = (Units)toUnitComboBox.getSelectedItem();
+        
+        converter = new Converter(from, to);//Create new unit converter
+        formater = new DecimalFormat("#.####");//Create new decimal formater
+        
+        inValue = Double.parseDouble(inputField.getText());//Get input value
+        outValue = converter.convert(inValue);//Convert to get output
+        outputLabel.setText(formater.format(inValue) + getUnitPrettyShort(from) + " is " + formater.format(outValue) + getUnitPrettyShort(to));//Set output
+    }//GEN-LAST:event_confirmButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,7 +211,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> fromUnitComboBox;
     private javax.swing.JTextField inputField;
     private javax.swing.JLabel intoLabel;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel outputLabel;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JComboBox<String> toUnitComboBox;
     // End of variables declaration//GEN-END:variables
