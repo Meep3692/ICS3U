@@ -12,12 +12,13 @@ package cd;
  * @author Meep3_000
  */
 public class Main extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
+        collectionTable.setModel(new CDTableModel());
     }
 
     /**
@@ -29,17 +30,98 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fileChooser = new javax.swing.JFileChooser();
+        sortButtonGroup = new javax.swing.ButtonGroup();
+        collectionScrollPane = new javax.swing.JScrollPane();
+        collectionTable = new javax.swing.JTable();
+        MenuBar = new javax.swing.JMenuBar();
+        fileMenu = new javax.swing.JMenu();
+        newMenuItem = new javax.swing.JMenuItem();
+        openMenuItem = new javax.swing.JMenuItem();
+        saveMenuItem = new javax.swing.JMenuItem();
+        saveAsMenuItem = new javax.swing.JMenuItem();
+        addMenuItem = new javax.swing.JMenuItem();
+        removeMenuItem = new javax.swing.JMenuItem();
+        sortMenu = new javax.swing.JMenu();
+        sortNoneRadioButton = new javax.swing.JRadioButtonMenuItem();
+        sortTitleRadioButton = new javax.swing.JRadioButtonMenuItem();
+        sortArtistRadioButton = new javax.swing.JRadioButtonMenuItem();
+
+        fileChooser.setCurrentDirectory(new java.io.File("C:\\Program Files\\NetBeans 8.2\\%homepath%"));
+        fileChooser.setDialogTitle("Save As");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("CD Collecter");
+
+        collectionTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        collectionScrollPane.setViewportView(collectionTable);
+
+        fileMenu.setText("File");
+
+        newMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
+        newMenuItem.setText("New");
+        fileMenu.add(newMenuItem);
+
+        openMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        openMenuItem.setText("Open");
+        fileMenu.add(openMenuItem);
+
+        saveMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        saveMenuItem.setText("Save");
+        fileMenu.add(saveMenuItem);
+
+        saveAsMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        saveAsMenuItem.setText("SaveAs");
+        fileMenu.add(saveAsMenuItem);
+
+        addMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        addMenuItem.setText("Add CD");
+        fileMenu.add(addMenuItem);
+
+        removeMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        removeMenuItem.setText("Remove CD");
+        fileMenu.add(removeMenuItem);
+
+        MenuBar.add(fileMenu);
+
+        sortMenu.setText("Sort");
+
+        sortButtonGroup.add(sortNoneRadioButton);
+        sortNoneRadioButton.setSelected(true);
+        sortNoneRadioButton.setText("None");
+        sortMenu.add(sortNoneRadioButton);
+
+        sortButtonGroup.add(sortTitleRadioButton);
+        sortTitleRadioButton.setText("Title");
+        sortMenu.add(sortTitleRadioButton);
+
+        sortButtonGroup.add(sortArtistRadioButton);
+        sortArtistRadioButton.setText("Artist");
+        sortMenu.add(sortArtistRadioButton);
+
+        MenuBar.add(sortMenu);
+
+        setJMenuBar(MenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(collectionScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(collectionScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
         );
 
         pack();
@@ -81,5 +163,21 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuBar MenuBar;
+    private javax.swing.JMenuItem addMenuItem;
+    private javax.swing.JScrollPane collectionScrollPane;
+    private javax.swing.JTable collectionTable;
+    private javax.swing.JFileChooser fileChooser;
+    private javax.swing.JMenu fileMenu;
+    private javax.swing.JMenuItem newMenuItem;
+    private javax.swing.JMenuItem openMenuItem;
+    private javax.swing.JMenuItem removeMenuItem;
+    private javax.swing.JMenuItem saveAsMenuItem;
+    private javax.swing.JMenuItem saveMenuItem;
+    private javax.swing.JRadioButtonMenuItem sortArtistRadioButton;
+    private javax.swing.ButtonGroup sortButtonGroup;
+    private javax.swing.JMenu sortMenu;
+    private javax.swing.JRadioButtonMenuItem sortNoneRadioButton;
+    private javax.swing.JRadioButtonMenuItem sortTitleRadioButton;
     // End of variables declaration//GEN-END:variables
 }
