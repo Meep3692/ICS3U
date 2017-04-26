@@ -1,9 +1,9 @@
 /*
-Author: 
-Date Modified: 
+Author: Darian
+Date Modified: April 24, 2017
 IDE: Netbeans 8.2
-Program: 
-File: 
+Program: Store, display, and modify a cd collection
+File: Table model to display cds
  */
 package cd;
 
@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CDTableModel extends DefaultTableModel {
     public CDTableModel(){
-        super(new String[]{"Title", "Artist"}, 0);
+        super(new String[]{"Artist", "Title"}, 0);
     }
     
     @Override
@@ -29,7 +29,7 @@ public class CDTableModel extends DefaultTableModel {
             super.removeRow(0);
         }
         cds.forEach((cd) -> {
-            super.addRow(new String[]{cd.title, cd.artist});
+            super.addRow(new String[]{cd.artist, cd.title});
         });
     }
 }
