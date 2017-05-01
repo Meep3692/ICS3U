@@ -1,14 +1,20 @@
 /*
 Author: Darian
-Date Modified: April 26, 2017
+Date Modified: May 1, 2017
 IDE: Netbeans 8.2
 Program: Store, display, and modify a cd collection
 File: GUI and logic
  */
 package cd;
 
+import csv.CSVTable;
+import csv.TableEntry;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -16,11 +22,12 @@ import java.util.Collections;
  */
 public class Main extends javax.swing.JFrame {
     
-    private final ArrayList<CD> cds;
+    private ArrayList<CD> cds;
     
     private SortMethods sort = SortMethods.NONE;
     
     private boolean selectorRemove = false;
+    private String currentPath;
     
     private void addCD(CD cd){
         cds.add(cd);
@@ -44,6 +51,32 @@ public class Main extends javax.swing.JFrame {
                 Collections.sort(cds, new CDArtistComparator());
                 model.setCDs(cds);
                 break;
+        }
+    }
+    
+    private void save(String path){
+        CSVTable table = new CSVTable(2);
+        cds.forEach((cd) -> {
+            table.addEntry(new TableEntry(new String[]{cd.artist, cd.title}));
+        });
+        try {
+            table.save(path);
+            currentPath = path;
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void load(String path){
+        cds = new ArrayList();
+        try {
+            CSVTable table = CSVTable.load(path);
+            for(int i = 0; i < table.getWidth(); i++){
+                cds.add(new CD(table.getCell(1, i), table.getCell(0, i)));
+            }
+            currentPath = path;
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -161,6 +194,11 @@ public class Main extends javax.swing.JFrame {
 
         openMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         openMenuItem.setText("Open");
+        openMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(openMenuItem);
 
         saveMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
@@ -169,6 +207,11 @@ public class Main extends javax.swing.JFrame {
 
         saveAsMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         saveAsMenuItem.setText("SaveAs");
+        saveAsMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveAsMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(saveAsMenuItem);
 
         addMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
@@ -281,6 +324,20 @@ public class Main extends javax.swing.JFrame {
         sort = SortMethods.ARTIST;
         refreshTable();
     }//GEN-LAST:event_sortArtistRadioButtonActionPerformed
+
+    private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
+        int returnVal = fileChooser.showDialog(this, "Open");
+        if(returnVal == JFileChooser.APPROVE_OPTION){
+            load(fileChooser.getSelectedFile().getAbsolutePath());
+        }
+    }//GEN-LAST:event_openMenuItemActionPerformed
+
+    private void saveAsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuItemActionPerformed
+        int returnVal = fileChooser.showDialog(this, "Save");
+        if(returnVal == JFileChooser.APPROVE_OPTION){
+            save(fileChooser.getSelectedFile().getAbsolutePath());
+        }
+    }//GEN-LAST:event_saveAsMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
