@@ -1,6 +1,6 @@
 /*
 Author: Darian
-Date Modified: May 1, 2017
+Date Modified: May 2, 2017
 IDE: Netbeans 8.2
 Program: Store, display, and modify a cd collection
 File: GUI and logic
@@ -78,6 +78,7 @@ public class Main extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+        refreshTable();
     }
     
     /**
