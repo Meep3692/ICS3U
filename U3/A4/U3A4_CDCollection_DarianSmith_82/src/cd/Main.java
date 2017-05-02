@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -65,6 +66,7 @@ public class Main extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.setTitle(path + " - CD Collection");
     }
     
     private void load(String path){
@@ -79,6 +81,7 @@ public class Main extends javax.swing.JFrame {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
         refreshTable();
+        this.setTitle(path + " - CD Collection");
     }
     
     /**
@@ -126,7 +129,8 @@ public class Main extends javax.swing.JFrame {
         sortArtistRadioButton = new javax.swing.JRadioButtonMenuItem();
 
         fileChooser.setCurrentDirectory(new java.io.File("C:\\Program Files\\NetBeans 8.2\\%homepath%"));
-        fileChooser.setDialogTitle("Save As");
+        fileChooser.setDialogTitle("Select File");
+        fileChooser.setFileFilter(new FileNameExtensionFilter("CD Collection","cdc"));
 
         cdSelectorFrame.setMinimumSize(new java.awt.Dimension(300, 200));
         java.awt.GridBagLayout cdSelectorFrameLayout = new java.awt.GridBagLayout();
@@ -204,6 +208,11 @@ public class Main extends javax.swing.JFrame {
 
         saveMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         saveMenuItem.setText("Save");
+        saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(saveMenuItem);
 
         saveAsMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
@@ -302,43 +311,50 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_removeMenuItemActionPerformed
 
     private void confirmSelectorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmSelectorButtonActionPerformed
-        CD cd = new CD(titleSelectorField.getText(), artistSelectorField.getText());
-        if(selectorRemove)
-            removeCD(cd);
-        else
-            addCD(cd);
-        refreshTable();
-        cdSelectorFrame.setVisible(false);
+        CD cd = new CD(titleSelectorField.getText(), artistSelectorField.getText());//Declare new cd
+        if(selectorRemove)//If we were removing
+            removeCD(cd);//Remove CD
+        else//We were adding
+            addCD(cd);//Add cd
+        refreshTable();//Refresh
+        cdSelectorFrame.setVisible(false);//Close cd selector
     }//GEN-LAST:event_confirmSelectorButtonActionPerformed
 
     private void sortNoneRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortNoneRadioButtonActionPerformed
-        sort = SortMethods.NONE;
-        refreshTable();
+        sort = SortMethods.NONE;//Set sort method
+        refreshTable();//Refesh so it takes effect
     }//GEN-LAST:event_sortNoneRadioButtonActionPerformed
 
     private void sortTitleRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortTitleRadioButtonActionPerformed
-        sort = SortMethods.TITLE;
-        refreshTable();
+        sort = SortMethods.TITLE;//Set sort method
+        refreshTable();//Refresh so it takes effect
     }//GEN-LAST:event_sortTitleRadioButtonActionPerformed
 
     private void sortArtistRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortArtistRadioButtonActionPerformed
-        sort = SortMethods.ARTIST;
-        refreshTable();
+        sort = SortMethods.ARTIST;//Set sort method
+        refreshTable();//Refresh to allow it to take effect
     }//GEN-LAST:event_sortArtistRadioButtonActionPerformed
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
-        int returnVal = fileChooser.showDialog(this, "Open");
-        if(returnVal == JFileChooser.APPROVE_OPTION){
-            load(fileChooser.getSelectedFile().getAbsolutePath());
+        int returnVal = fileChooser.showDialog(this, "Open");//Open the file chooser
+        if(returnVal == JFileChooser.APPROVE_OPTION){//If they hit save
+            load(fileChooser.getSelectedFile().getAbsolutePath());//Open the file selected by the file chooser
         }
     }//GEN-LAST:event_openMenuItemActionPerformed
 
     private void saveAsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuItemActionPerformed
-        int returnVal = fileChooser.showDialog(this, "Save");
-        if(returnVal == JFileChooser.APPROVE_OPTION){
-            save(fileChooser.getSelectedFile().getAbsolutePath());
+        int returnVal = fileChooser.showDialog(this, "Save");//Open the file chooser
+        if(returnVal == JFileChooser.APPROVE_OPTION){//If they hit save
+            save(fileChooser.getSelectedFile().getAbsolutePath());//save to the path given by the file chooser
         }
     }//GEN-LAST:event_saveAsMenuItemActionPerformed
+
+    private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
+        if(!"".equals(currentPath))//Make sure there's a path
+            save(currentPath);//Save to the open file
+        else
+            saveAsMenuItemActionPerformed(evt);//Pretend we pressed the Save As button
+    }//GEN-LAST:event_saveMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
