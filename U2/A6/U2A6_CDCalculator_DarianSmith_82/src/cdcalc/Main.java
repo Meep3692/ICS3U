@@ -128,7 +128,7 @@ public class Main extends javax.swing.JFrame {
         initValue = Float.parseFloat(initField.getText());//Parse values
         intrestRate = Float.parseFloat(rateField.getText()) / 100;
         endValue = Float.parseFloat(endField.getText());
-        if(initValue <= 0){//Avoid infinite loop
+        if(initValue <= 0 || intrestRate <= 0){//Avoid infinite loop
             return;
         }
         int years = 0;//Initialize counter
