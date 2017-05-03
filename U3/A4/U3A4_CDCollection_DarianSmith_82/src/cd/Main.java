@@ -91,8 +91,6 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         collectionTable.setModel(new CDTableModel());
         cds = new ArrayList<>();
-        System.out.println("Noodle".compareTo("Alpha"));
-        System.out.println("Alpha".compareTo("Noodle"));
     }
 
     /**
