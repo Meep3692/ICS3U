@@ -17,7 +17,7 @@ public class CDArtistComparator implements Comparator<CD> {
 
     @Override
     public int compare(CD o1, CD o2) {
-        return o1.artist.compareTo(o2.artist);
+        return o1.artist.compareTo(o2.artist);//Compare the artists. Used for sorting
     }
     
 }

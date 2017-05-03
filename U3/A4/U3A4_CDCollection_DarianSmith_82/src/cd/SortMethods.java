@@ -12,7 +12,7 @@ package cd;
  * @author Meep3_000
  */
 public enum SortMethods {
-    NONE,
-    ARTIST,
-    TITLE
+    NONE,//Just use the array
+    ARTIST,//Use the CDArtistComparator
+    TITLE//Use the CDTitleComparator
 }

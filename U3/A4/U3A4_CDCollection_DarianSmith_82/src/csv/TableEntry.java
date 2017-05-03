@@ -30,18 +30,18 @@ public class TableEntry{
     }
     
     public int getSize(){
-        return contents.length;
+        return contents.length;//Safely return width
     }
     
     @Override
     public String toString(){
-        String output = "";
-        for(String cell : contents){
-            String safeCell = cell.replace(",", "\\,");
-            output += safeCell + ",";
+        String output = "";//Initialise temp string to store output
+        for(String cell : contents){//Iterate through cells
+            String safeCell = cell.replace(",", "\\,");//Escape the commas
+            output += safeCell + ",";//Add cell with comma
         }
-        output = output.substring(0, output.length() - 1);
-        return output;
+        output = output.substring(0, output.length() - 1);//Remove ending comma
+        return output;//Return string
     }
 
 }

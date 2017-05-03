@@ -15,30 +15,30 @@ import java.util.Objects;
  */
 public class CD {
     
-    public String title;
-    public String artist;
+    public String title;//Title of CD
+    public String artist;//Artist of CD
     
     public CD(String title, String artist){
-        this.title = title;
+        this.title = title;//Set values
         this.artist = artist;
     }
     
     @Override
     public boolean equals(Object other){
-        return this.hashCode() == other.hashCode();
+        return this.hashCode() == other.hashCode();//So we can create a new CD and see if it's the same as another
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 61 * hash + Objects.hashCode(this.title);
+        hash = 61 * hash + Objects.hashCode(this.title);//Hash the title and artist as those are the only imprtant parts
         hash = 61 * hash + Objects.hashCode(this.artist);
         return hash;
     }
     
     @Override
     public String toString(){
-        return this.artist + " - " + this.title;
+        return this.artist + " - " + this.title;//This was only necisary in testing, but it outputs it pretty (Artist - Title)
     }
 
 }
