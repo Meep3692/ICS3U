@@ -176,7 +176,7 @@ public class Main extends javax.swing.JFrame {
         cdSelectorFrame.getContentPane().add(confirmSelectorButton, gridBagConstraints);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("CD Collecter");
+        setTitle("CD Collection");
 
         collectionTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -195,6 +195,11 @@ public class Main extends javax.swing.JFrame {
 
         newMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         newMenuItem.setText("New");
+        newMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(newMenuItem);
 
         openMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
@@ -216,7 +221,7 @@ public class Main extends javax.swing.JFrame {
         fileMenu.add(saveMenuItem);
 
         saveAsMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        saveAsMenuItem.setText("SaveAs");
+        saveAsMenuItem.setText("Save As");
         saveAsMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveAsMenuItemActionPerformed(evt);
@@ -355,6 +360,13 @@ public class Main extends javax.swing.JFrame {
         else
             saveAsMenuItemActionPerformed(evt);//Pretend we pressed the Save As button
     }//GEN-LAST:event_saveMenuItemActionPerformed
+
+    private void newMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMenuItemActionPerformed
+        cds = new ArrayList();
+        currentPath = "";
+        refreshTable();
+        this.setTitle("CD Collection");
+    }//GEN-LAST:event_newMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
