@@ -16,7 +16,7 @@ public class GradeConverter8 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        integer type;
+        int type;//Changed integer to int
 
 	do
 	{
@@ -37,11 +37,11 @@ public class GradeConverter8 {
     // Conversion function percentage to Alpha
     public static void percentageToAlpha ()
     {
-	integer grade;
+	int grade;//Changed integer to int
 	String alphaGrade;
 	String messageOut;
 
-	System.out.printline("Please enter the numeric grade: ");
+	System.out.println("Please enter the numeric grade: ");//Changed printline to println
 	grade=sc.nextInt();
 
 	if (grade < 50) {
