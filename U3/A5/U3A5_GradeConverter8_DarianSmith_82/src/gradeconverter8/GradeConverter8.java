@@ -26,10 +26,13 @@ public class GradeConverter8 {
 	    System.out.println("2. Convert to a Level grade");
 	    System.out.println("3. Exit \n");
 	    System.out.println("Please enter your selection: ");
-	    type=sc.nextInt();
-
-	    if (type==1) percentageToLevel();
-	    if (type==2) percentageToAlpha();
+            try{
+                type=Integer.parseInt(sc.nextLine());//Prevent exception breaking program when non-number input
+            }catch(NumberFormatException e){
+                type = 0;
+            }
+            if (type==1) percentageToAlpha();//Swapped these around
+            if (type==2) percentageToLevel();
 	}
 	while (type != 3);
     }
@@ -144,7 +147,7 @@ public class GradeConverter8 {
 		levelGrade="Error - invalid mark, try again!";
 	}
 
-	messageOut=(grade + "% = " + grade);
+	messageOut=(grade + "% = " + levelGrade);//Changed grade to levelGrade so it outputs the right thing
 	System.out.println(messageOut);
     }
     
