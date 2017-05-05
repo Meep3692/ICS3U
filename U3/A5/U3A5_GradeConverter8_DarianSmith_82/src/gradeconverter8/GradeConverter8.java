@@ -45,8 +45,12 @@ public class GradeConverter8 {
 	String messageOut;
 
 	System.out.println("Please enter the numeric grade: ");//Changed printline to println
-	grade=sc.nextInt();
-
+	try{
+            grade=Integer.parseInt(sc.nextLine());//Prevent exception breaking program when non-number input
+        }catch(NumberFormatException e){
+            grade = 5000;//Set to an invalid grade
+        }
+        
 	if (grade < 50) {
 		alphaGrade="F";
 	}else if ((grade >= 50) && (grade <=52))
@@ -58,7 +62,7 @@ public class GradeConverter8 {
 	}else if ((grade >= 57) && (grade <=59))
 	{
 		alphaGrade = "D+";
-	}else if ((grade >= 60) && (grade <=72))
+	}else if ((grade >= 60) && (grade <=62))
 	{
 		alphaGrade = "C-";
 	}else if ((grade >= 63) && (grade <=66))
@@ -103,7 +107,11 @@ public class GradeConverter8 {
 	String messageOut;
 
 	System.out.println("Please enter the numeric grade: ");
-	grade=sc.nextInt();
+	try{
+            grade=Integer.parseInt(sc.nextLine());//Prevent exception breaking program when non-number input
+        }catch(NumberFormatException e){
+            grade = 5000;//Set to an invalid grade
+        }
 
 	if (grade < 50) {
 		levelGrade="R";
@@ -130,7 +138,7 @@ public class GradeConverter8 {
 		levelGrade="L3-";
 	}else if ((grade >= 73) && (grade <=76))
 	{
-		levelGrade="L3-";
+		levelGrade="L3";
 	}else if ((grade >= 77) && (grade <=79))
 	{
 		levelGrade="L3+";
@@ -140,7 +148,7 @@ public class GradeConverter8 {
 	}else if ((grade >= 85) && (grade <=89))
 	{
 		levelGrade="L4";
-	}else if ((grade >= 90) && (grade >=100))
+	}else if ((grade >= 90) && (grade <=100))
 	{
 		levelGrade="L4+";
 	}else{
