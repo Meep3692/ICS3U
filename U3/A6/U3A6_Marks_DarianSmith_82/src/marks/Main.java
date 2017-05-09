@@ -7,16 +7,59 @@ File: GUI and Logic
  */
 package marks;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 /**
  *
  * @author Meep3_000
  */
 public class Main extends javax.swing.JFrame {
-
+    
+    List<Integer> markList;
+    
+    private void refresh(){
+        markList.sort(Comparator.naturalOrder());//Sort list
+        String listString = "";//Temp var to store stringified list
+        listString = markList.stream().map((mark) -> mark + "\n").reduce(listString, String::concat);//Add all marks to the temp var with line breaks
+        marksListTextArea.setText(listString);//Set text area
+    }
+    
+    private float getAverage(){
+        float output = 0.0f;//Initialise temp output var
+        for(int mark : markList) output += mark;//Add all marks to temp var
+        output /= markList.size();//Divide by size to create average
+        return output;//Return temp var
+    }
+    
+    private int getMax(){
+        int max = 0;//Temp var to store max, initialised as very small number
+        for(int mark : markList)//Iterate through all marks
+            if(mark > max)//Current mark is higher than the highest mark we found so far
+                max = mark;//Set temp var to new highest
+        return max;//Return temp var
+    }
+    
+    private int getMin(){
+        int min = 100;//Temp var to store min, initialised as large number
+        for(int mark : markList)//Iterate through all makrs
+            if(mark < min)//Current mark is lower than the lowest mark we found so far
+                min = mark;//Set temp var to new lowest
+        return min;//Return temp var
+    }
+    
+    private int[] getLevels(){
+        int[] output = new int[]{0, 0, 0, 0, 0};
+        
+        return output;
+    }
+    
     /**
      * Creates new form Main
      */
     public Main() {
+        markList = new ArrayList<Integer>();
         initComponents();
     }
 
@@ -64,6 +107,12 @@ public class Main extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         markInputPanel.add(markInputLabel, gridBagConstraints);
+
+        markInputField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputMark(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -74,6 +123,11 @@ public class Main extends javax.swing.JFrame {
         markInputPanel.add(markInputField, gridBagConstraints);
 
         markInputButton.setText("Enter");
+        markInputButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputMark(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -133,6 +187,17 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void inputMark(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputMark
+        int mark;
+        try{
+            mark = Integer.parseInt(markInputField.getText());
+            markList.add(mark);
+            refresh();
+        }catch(NumberFormatException e){
+            
+        }
+    }//GEN-LAST:event_inputMark
+
     /**
      * @param args the command line arguments
      */
@@ -161,10 +226,8 @@ public class Main extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Main().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Main().setVisible(true);
         });
     }
 
