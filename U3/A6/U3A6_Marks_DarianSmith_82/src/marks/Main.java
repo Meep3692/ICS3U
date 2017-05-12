@@ -1,12 +1,13 @@
 /*
 Author: Darian
-Date Modified: May 8, 2017
+Date Modified: May 11, 2017
 IDE: Netbeans 8.2
 Program: Store and analyse a list of student marks
 File: GUI and Logic
  */
 package marks;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -24,6 +25,24 @@ public class Main extends javax.swing.JFrame {
         String listString = "";//Temp var to store stringified list
         listString = markList.stream().map((mark) -> mark + "\n").reduce(listString, String::concat);//Add all marks to the temp var with line breaks
         marksListTextArea.setText(listString);//Set text area
+        
+        int max, min, range;
+        int[] levels;
+        String statsString = "";//Temp var to store stats
+        max = getMax();//We use these twice so it's faster to store them
+        min = getMin();
+        range = max - min;//Calculate the range
+        levels = getLevels();//We use this 5 times, store the output
+        statsString += "Class average: " + new DecimalFormat("0.0").format(getAverage());//Format and add class average to output
+        statsString += "\nMaximum mark: " + max;//Add max mark to output
+        statsString += "\nMinimum mark: " + min;//Add min mark to output
+        statsString += "\nRange: " + range;//Add range to output
+        statsString += "\nLevel R: " + levels[0];//Add levels to output
+        statsString += "\nLevel 1: " + levels[1];
+        statsString += "\nLevel 2: " + levels[2];
+        statsString += "\nLevel 3: " + levels[3];
+        statsString += "\nLevel 4: " + levels[4];
+        statsTextArea.setText(statsString);//Set text area
     }
     
     private float getAverage(){
@@ -34,7 +53,7 @@ public class Main extends javax.swing.JFrame {
     }
     
     private int getMax(){
-        int max = 0;//Temp var to store max, initialised as very small number
+        int max = markList.get(0);//Temp var to store max, initialised as first item in list
         for(int mark : markList)//Iterate through all marks
             if(mark > max)//Current mark is higher than the highest mark we found so far
                 max = mark;//Set temp var to new highest
@@ -42,7 +61,7 @@ public class Main extends javax.swing.JFrame {
     }
     
     private int getMin(){
-        int min = 100;//Temp var to store min, initialised as large number
+        int min = markList.get(0);//Temp var to store min, initialised as first item in list
         for(int mark : markList)//Iterate through all makrs
             if(mark < min)//Current mark is lower than the lowest mark we found so far
                 min = mark;//Set temp var to new lowest
@@ -50,9 +69,20 @@ public class Main extends javax.swing.JFrame {
     }
     
     private int[] getLevels(){
-        int[] output = new int[]{0, 0, 0, 0, 0};
-        
-        return output;
+        int[] output = new int[]{0, 0, 0, 0, 0};//Initialise array to store output
+        for(int mark : markList){
+            if(mark < 50)
+                output[0]++;//Add to level R
+            if(mark >= 50 && mark < 60)
+                output[1]++;//Add to level 1
+            if(mark >= 60 && mark < 70)
+                output[2]++;//Add to level 2
+            if(mark >= 70 && mark < 80)
+                output[3]++;//Add to level 3
+            if(mark >= 80)
+                output[4]++;//Add to level 4
+        }
+        return output;//Return array
     }
     
     /**
@@ -193,6 +223,7 @@ public class Main extends javax.swing.JFrame {
             mark = Integer.parseInt(markInputField.getText());
             markList.add(mark);
             refresh();
+            markInputField.setText("");
         }catch(NumberFormatException e){
             
         }
