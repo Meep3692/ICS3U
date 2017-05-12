@@ -1,6 +1,6 @@
 /*
 Author: Darian
-Date Modified: May 11, 2017
+Date Modified: May 12, 2017
 IDE: Netbeans 8.2
 Program: Store and analyse a list of student marks
 File: GUI and Logic
