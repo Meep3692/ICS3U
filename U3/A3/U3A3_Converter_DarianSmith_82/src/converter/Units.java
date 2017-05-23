@@ -8,7 +8,7 @@ File: Enum for unit types
 package converter;
 
 /**
- *
+ *Enumerator for unit types
  * @author Meep3_000
  */
 public enum Units{

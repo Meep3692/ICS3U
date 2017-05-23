@@ -11,7 +11,7 @@ import java.text.DecimalFormat;
 import javax.swing.DefaultComboBoxModel;
 
 /**
- *
+ *Main GUI and other gubbons
  * @author Meep3_000
  */
 public class Main extends javax.swing.JFrame {
@@ -150,7 +150,10 @@ public class Main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Occurs when the convert button is pressed
+     * @param evt Action event args (not actually used)
+     */
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         Units from, to;//Declare vars
         double inValue, outValue;
