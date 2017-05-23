@@ -1,6 +1,6 @@
 /*
 Author: Darian
-Date Modified: May 2, 2017
+Date Modified: May 23, 2017
 IDE: Netbeans 8.2
 Program: Store, display, and modify a cd collection
 File: CSV formated table
@@ -64,7 +64,7 @@ public class CSVTable {
                 }
                 else if(line.charAt(i) == '\\' && line.charAt(i + 1) == ','){//An escaped comma
                     currentEntry += ",";//Add a literal comma to the cell
-                    i++;
+                    i++;//Skip character because escaped comma takes up 2
                 }else{
                     currentEntry += line.charAt(i);//Just add the character to the cell
                 }
