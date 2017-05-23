@@ -1,6 +1,6 @@
 /*
 Author: Darian
-Date Modified: May 2, 2017
+Date Modified: May 23, 2017
 IDE: Netbeans 8.2
 Program: Store, display, and modify a cd collection
 File: GUI and logic
@@ -28,7 +28,7 @@ public class Main extends javax.swing.JFrame {
     private SortMethods sort = SortMethods.NONE;
     
     private boolean selectorRemove = false;
-    private String currentPath;
+    private String currentPath = "";
     
     private void addCD(CD cd){
         cds.add(cd);
@@ -348,7 +348,10 @@ public class Main extends javax.swing.JFrame {
     private void saveAsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuItemActionPerformed
         int returnVal = fileChooser.showDialog(this, "Save");//Open the file chooser
         if(returnVal == JFileChooser.APPROVE_OPTION){//If they hit save
-            save(fileChooser.getSelectedFile().getAbsolutePath());//save to the path given by the file chooser
+            String filePath= fileChooser.getSelectedFile().getAbsolutePath();
+            if(!fileChooser.getSelectedFile().getName().contains("."))
+                filePath += ".cdc";
+            save(filePath);//save to the path given by the file chooser
         }
     }//GEN-LAST:event_saveAsMenuItemActionPerformed
 
