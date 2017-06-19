@@ -24,7 +24,7 @@ public class Astronomap {
         AstronomapGame game = new AstronomapGame("Awoo");//Create game object
         try {
             AppGameContainer gc = new AppGameContainer(game, 800, 600, false);//Create game container
-            gc.setShowFPS(false);//Disable FPS view
+            //gc.setShowFPS(false);//Disable FPS view
             gc.start();//Start game
         } catch (SlickException ex) {
             Logger.getLogger(Astronomap.class.getName()).log(Level.SEVERE, null, ex);
