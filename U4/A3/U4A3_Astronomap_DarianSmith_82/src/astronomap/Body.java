@@ -1,9 +1,9 @@
 /*
-Author: 
-Date Modified: 
+Author: Darain
+Date Modified: June 18, 2017
 IDE: Netbeans 8.2
-Program: 
-File: 
+Program: Astronomap
+File: Define object for astronomical bodies
  */
 package astronomap;
 

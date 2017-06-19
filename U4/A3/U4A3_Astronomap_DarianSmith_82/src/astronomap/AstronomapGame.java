@@ -1,6 +1,6 @@
 /*
 Author: Darian
-Date Modified: June 12, 2017
+Date Modified: June 19, 2017
 IDE: Netbeans 8.2
 Program: Astronomap
 File: Game
@@ -51,9 +51,10 @@ public class AstronomapGame extends BasicGame {
         mars.addSatellite(phobos);
         Body deimos = new Body("Deimos", 6200, 0.0001568418046, 0.0000000000000007422118532422, 0, mars, "res/img/deimos.png");
         mars.addSatellite(deimos);
-        
         sun.addSatellite(mars);
-        System.out.println(phobos.getPeriod());
+        Body jupiter = new Body("Jupiter", 69911000, 5.20260, 1/1047, -2.7502823751276, sun, "res/img/jupiter.png");
+        
+        sun.addSatellite(jupiter);
     }
 
     @Override
@@ -78,11 +79,11 @@ public class AstronomapGame extends BasicGame {
             tracking = "";
         }
         if(input.isKeyDown(Input.KEY_PRIOR)){
-            zoom += 0.01;
+            zoom += 0.1;
             scale = Math.pow(2, zoom);
         }
         if(input.isKeyDown(Input.KEY_NEXT)){
-            zoom -= 0.01;
+            zoom -= 0.1;
             scale = Math.pow(2, zoom);
         }
     }
