@@ -7,7 +7,10 @@ File: Game
  */
 package astronomap;
 
+import java.text.DecimalFormat;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.util.TimeZone;
 import org.newdawn.slick.*;
 
 /**
@@ -16,14 +19,21 @@ import org.newdawn.slick.*;
  */
 public class AstronomapGame extends BasicGame {
     
-    private Body[] bodies;
     private Body sun;
     private double scale;
     private double zoom;
+    private double timescale;
+    private double moveSpeed;
     private double offsetX;
     private double offsetY;
     private String tracking;
-    private LocalDateTime time;
+    public static LocalDateTime time;
+    
+    private DecimalFormat fourmat = new DecimalFormat("###,##0.####");//Amazing pun, also formater for displayed info
+    DateForm dateForm = new DateForm();
+    
+    private int lastMouseX;
+    private int lastMouseY;
     
     public AstronomapGame(String title) {
         super(title);
@@ -31,8 +41,9 @@ public class AstronomapGame extends BasicGame {
         offsetY = -300;
         scale = 1;
         tracking = "Test";
-        bodies = new Body[2];
         time = LocalDateTime.now();
+        timescale = 1;
+        moveSpeed = 2;
     }
 
     @Override
@@ -81,37 +92,61 @@ public class AstronomapGame extends BasicGame {
         saturn.addSatellite(mimas);
         Body enceladus = new Body("Enceladus", 252100, 0.00159058414, 0.000000000054311887827482005, 0, saturn, "res/img/enceladus.png");
         saturn.addSatellite(enceladus);
-        
+        Body tethys = new Body("Tethys", 531100, 0.00196940637, 0.000000000310444361585519, 0, saturn, "res/img/tethys.png");
+        saturn.addSatellite(tethys);
+        Body dione = new Body("Dione", 561400, 0.00252273644, 0.000000000550777305959812, 0, saturn, "res/img/dione.png");
+        saturn.addSatellite(dione);
+        Body rhea = new Body("Rhea", 763800, 0.00352349935, 0.0000000011596836467392582, 0, saturn, "res/img/rhea.png");
+        saturn.addSatellite(rhea);
+        Body titan = new Body("Titan", 2575500, 0.008167696467, 0.00000006763469617812001, 0, saturn, "res/img/titan.png");
+        saturn.addSatellite(titan);
+        Body iapetus = new Body("Iapetus", 7345400, 0.02380261152, 0.000000000907846971703685, 0, saturn, "res/img/iapetus.png");
+        saturn.addSatellite(iapetus);
         sun.addSatellite(saturn);
         //Uranus
         Body uranus = new Body("Uranus", 25362000, 19.2184, 0.00004364680326511001, -3.0484053918209, sun, "res/img/uranus.png");
-        
+        Body miranda = new Body("Miranda", 235800, 0.000864918728, 0.0000000000331335599029, 0, uranus, "res/img/miranda.png");
+        uranus.addSatellite(miranda);
+        Body ariel = new Body("Ariel", 578900, 0.00127688983, 0.000000000680268688143, 0, uranus, "res/img/ariel.png");
+        uranus.addSatellite(ariel);
+        Body umbriel = new Body("Umbriel", 584700, 0.00177810017, 0.000000000589264525132, 0, uranus, "res/img/umbriel.png");
+        uranus.addSatellite(umbriel);
+        Body titania = new Body("Titania", 788400, 0.00291387837, 0.0000000017733242151370002, 0, uranus, "res/img/titania.png");
+        uranus.addSatellite(titania);
+        Body oberon = new Body("Oberon", 761400, 0.00390059028, 0.0000000015153952890340001, 0, uranus, "res/img/oberon.png");
+        uranus.addSatellite(oberon);
         sun.addSatellite(uranus);
         //Neptune
         Body neptune = new Body("Neptune", 24622000, 30.110387, 0.0000515, -2.1200428361384, sun, "res/img/neptune.png");
+        sun.addSatellite(neptune);
     }
 
     @Override
     public void update(GameContainer gc, int i) throws SlickException {
-        time = LocalDateTime.now();
+        //Update time
+        time = time.plusNanos((long)(i * 1000000 * timescale));
+        
+        //Get input
         Input input = gc.getInput();
         
+        //Move with cursor keys
         if(input.isKeyDown(Input.KEY_UP)){
-            offsetY -= 1/scale;
+            offsetY -= moveSpeed/scale;
             tracking = "";
         }
         if(input.isKeyDown(Input.KEY_DOWN)){
-            offsetY += 1/scale;
+            offsetY += moveSpeed/scale;
             tracking = "";
         }
         if(input.isKeyDown(Input.KEY_LEFT)){
-            offsetX -= 1/scale;
+            offsetX -= moveSpeed/scale;
             tracking = "";
         }
         if(input.isKeyDown(Input.KEY_RIGHT)){
-            offsetX += 1/scale;
+            offsetX += moveSpeed/scale;
             tracking = "";
         }
+        //Zoom with PgUp/PgDwn
         if(input.isKeyDown(Input.KEY_PRIOR)){
             zoom += 0.1;
             scale = Math.pow(2, zoom);
@@ -120,12 +155,41 @@ public class AstronomapGame extends BasicGame {
             zoom -= 0.1;
             scale = Math.pow(2, zoom);
         }
+        //Timescale with angle bracketsw
+        if(input.isKeyPressed(Input.KEY_COMMA)){
+            timescale /= 2;
+        }
+        if(input.isKeyPressed(Input.KEY_PERIOD)){
+            timescale *= 2;
+        }
+        //Focus with click
+        if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON)){
+            lastMouseX = input.getAbsoluteMouseX();
+            lastMouseY = input.getAbsoluteMouseY();
+        }
+        //Set time with t
+        if(input.isKeyPressed(Input.KEY_T)){
+            dateForm.setBounds(gc.getScreenWidth() / 2, gc.getScreenHeight() / 2, 300, 200);
+            dateForm.setAlwaysOnTop(true);
+            //dateForm.setAlwaysOnTop(false);
+            dateForm.setVisible(true);
+        }
+    }
+    
+    @Override
+    public void mouseWheelMoved(int change){
+        zoom += change / 100;
+        scale = Math.pow(2, zoom);
     }
 
     @Override
     public void render(GameContainer gc, Graphics grphcs) throws SlickException {
         //System.out.println("Start draw");
         drawBody(sun, 0, 0, gc, grphcs);
+        lastMouseX = 0;//Reset mouse click
+        lastMouseY = 0;
+        grphcs.drawString("Timescale: " + timescale, 10, 10);
+        grphcs.drawString("Date: " + time.atZone(TimeZone.getDefault().toZoneId()).format(DateTimeFormatter.RFC_1123_DATE_TIME), 10, gc.getHeight() - 20);
         //System.out.println("End draw");
     }
     
@@ -140,6 +204,7 @@ public class AstronomapGame extends BasicGame {
         if(body.getName().equals(tracking)){//Put camera at planet if tracked
             offsetX = xCoord;
             offsetY = yCoord;
+            
         }
         double offsetScaledX = (offsetX * scale) - (gc.getWidth() / 2);//Find scaled offset
         double offsetScaledY = (offsetY * scale) - (gc.getHeight() / 2);
@@ -152,6 +217,10 @@ public class AstronomapGame extends BasicGame {
         float y3 = (float)((yScaled + (body.getRadius() * scale)) - offsetScaledY);
         float x4 = (float)((xScaled + (body.getRadius() * scale)) - offsetScaledX);
         float y4 = (float)((yScaled - (body.getRadius() * scale)) - offsetScaledY);
+        
+        if(lastMouseX != 0 && lastMouseY != 0 && lastMouseX > x1 && lastMouseX < x3 && lastMouseY > y1 && lastMouseY < y3){
+            tracking = body.getName();//Doing this here because we were already calculating the planet in screen space
+        }
          
         /*System.out.println("\t\tOrbit coords: " + distance + "[" + angle + "], (" + xCoord + ", " + yCoord + ")");//Debug stuff
         System.out.println("\t\tScreenPos: (" + (xScaled - offsetScaledX) + ", " + (yScaled - offsetScaledY) + ")");
@@ -164,6 +233,14 @@ public class AstronomapGame extends BasicGame {
             for(Body satalite : satalites){
                 drawBody(satalite, xCoord, yCoord, gc, g);//Render them too
             }
+        }
+        if(body.getName() == tracking){
+            g.drawString(body.getName(), 10, 30);//Display info
+            g.drawString("Radius: " + fourmat.format(body.getRadius() / 1000) + "km", 10, 45);
+            g.drawString("Orbit height: " + fourmat.format(distance / 1000) + "km", 10, 60);
+            g.drawString("Orbital Period: " + fourmat.format(body.getPeriod()) + "Years", 10, 75);
+            g.drawString("Mass: " + fourmat.format(body.getMass() * 1988550000000000000000000000.0) + "tonnes", 10, 90);//Dat conversion tho
+            
         }
     }
     

@@ -1,6 +1,6 @@
 /*
 Author: Darain
-Date Modified: June 18, 2017
+Date Modified: June 19, 2017
 IDE: Netbeans 8.2
 Program: Astronomap
 File: Define object for astronomical bodies
@@ -83,12 +83,14 @@ public class Body {
     }
     
     public double getPeriod(){
+        if(distance == 0)//Are we the sun?
+            return 0;//Avoid NaNs
         return Math.sqrt(((4 * Math.PI * Math.PI) / (G * (mass + parent.mass))) * (distance * distance * distance));
     }
     
     public Body[] getSatalites(){
-        Body[] array = new Body[satellites.size()];
-        return satellites.toArray(array);
+        Body[] array = new Body[satellites.size()];//Declare array to store bodies
+        return satellites.toArray(array);//Return array with bodies
     }
     
     public void addSatellite(Body body){
